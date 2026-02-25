@@ -14,13 +14,13 @@ SPREADSHEET_TIMEZONE = "America/Recife"
 SPREADSHEET_LOCALE = "pt_BR"
 
 BISTROL_OPTIONS = {
-    "1. duro e separado": "1",
-    "2. alongado com caroço": "2",
-    "3. alongado e firme": "3",
-    "4. alongado e mole": "4",
-    "5. bola mole": "5",
-    "6. pedaços macios e irregulares": "6",
-    "7. diarreia liquida": "7",
+    "1. duro e separado": 1,
+    "2. alongado com caroço": 2,
+    "3. alongado e firme": 3,
+    "4. alongado e mole": 4,
+    "5. bola mole": 5,
+    "6. pedaços macios e irregulares": 6,
+    "7. diarreia liquida": 7,
 }
 
 
@@ -52,7 +52,7 @@ def ensure_spreadsheet_settings(sheet_id: str) -> None:
     ).execute()
 
 
-def append_row(sheet_id: str, day: str, hour: str, stool_type: str) -> None:
+def append_row(sheet_id: str, day: str, hour: str, stool_type: int) -> None:
     service = get_sheets_service()
     body = {"values": [[day, hour, stool_type]]}
     service.spreadsheets().values().append(
