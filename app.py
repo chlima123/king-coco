@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import List
+from zoneinfo import ZoneInfo
 
 import streamlit as st
 from google.oauth2.service_account import Credentials
@@ -8,6 +9,7 @@ from googleapiclient.discovery import build
 SCOPES: List[str] = [
     "https://www.googleapis.com/auth/spreadsheets",
 ]
+RECIFE_TZ = ZoneInfo("America/Recife")
 
 BISTROL_OPTIONS = {
     "1. duro e separado": "1",
@@ -49,7 +51,7 @@ def main() -> None:
         st.error("Defina `sheet_id` em `.streamlit/secrets.toml`.")
         st.stop()
 
-    now = datetime.now()
+    now = datetime.now(RECIFE_TZ)
 
     with st.form("registro_form"):
         day = st.date_input("Dia", value=now.date(), format="DD/MM/YYYY")
